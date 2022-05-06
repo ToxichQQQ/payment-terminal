@@ -4,7 +4,6 @@ import { Operator } from "./Operator";
 import { operatorsArray } from "../constants";
 
 export function OperatorsList() {
-
   return (
     <Grid container>
       {operatorsArray.map((operator) => (
