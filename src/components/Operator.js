@@ -15,13 +15,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export function Operator({ operator, setOperator }) {
+export function Operator({ operator }) {
   const classes = useStyles();
   const navigate = useNavigate();
 
   const handleChangeOperator = () => {
-    setOperator(operator.name);
-    navigate("/terminal");
+    navigate(`/terminal/${operator.name}`);
   };
 
   return (

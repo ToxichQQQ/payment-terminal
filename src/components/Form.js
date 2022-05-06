@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import InputMask from "react-input-mask";
 import { validation } from "../validation";
 import Alert from "@mui/material/Alert";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -24,9 +25,10 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export function Form({ operator }) {
+export function Form() {
   const classes = useStyles();
 
+  const { operator } = useParams();
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
   const [isValidData, setValidData] = useState(false);
@@ -57,14 +59,9 @@ export function Form({ operator }) {
     setValidData(val);
   }, [phone, amount]);
 
-  const handleSetPhone = (value) => {
+  const handleSetValue = (value, setFunc) => {
     const val = value.replace(/[^\d]/g, "");
-    setPhone(val);
-  };
-
-  const handleSetAmount = (value) => {
-    const val = value.replace(/[^\d]/g, "");
-    setAmount(val);
+    setFunc(val);
   };
 
   return (
@@ -79,7 +76,7 @@ export function Form({ operator }) {
             disabled={false}
             maskChar=" "
             value={phone}
-            onChange={(e) => handleSetPhone(e.target.value)}
+            onChange={(e) => handleSetValue(e.target.value, setPhone)}
           >
             {() => (
               <TextField
@@ -94,7 +91,7 @@ export function Form({ operator }) {
             disabled={false}
             maskChar=" "
             value={amount}
-            onChange={(e) => handleSetAmount(e.target.value)}
+            onChange={(e) => handleSetValue(e.target.value, setAmount)}
           >
             {() => (
               <TextField
@@ -106,7 +103,7 @@ export function Form({ operator }) {
             )}
           </InputMask>
           <Button
-            onClick={() => onSubmit()}
+            onClick={onSubmit}
             disabled={!isValidData || submitting}
             variant="contained"
           >

@@ -1,22 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import { Operator } from "./Operator";
+import { operatorsArray } from "../constants";
 
-export function OperatorsList({ setOperator }) {
-  const [operators, setOperators] = useState([
-    { id: "1", name: "Megafon" },
-    { id: "2", name: "MTS" },
-    { id: "3", name: "Beeline" },
-  ]);
+export function OperatorsList() {
+  const operators = operatorsArray;
 
   return (
     <Grid container>
       {operators.map((operator) => (
-        <Operator
-          key={operator.id}
-          setOperator={setOperator}
-          operator={operator}
-        />
+        <Operator key={operator.id} operator={operator} />
       ))}
     </Grid>
   );
